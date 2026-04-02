@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMS Repurposer — Chat thread recap</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --surface: #1e293b;
+        --bubble-user: #334155;
+        --bubble-assistant: #0c4a6e;
+        --bubble-assistant-border: #0369a1;
+        --text: #f1f5f9;
+        --muted: #94a3b8;
+        --code-bg: #020617;
+        --code-border: #334155;
+        --accent: #38bdf8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        min-height: 100vh;
+      }
+
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 1.25rem;
+        background: var(--surface);
+        border-radius: 16px;
+        border: 1px solid var(--code-border);
+      }
+
+      header h1 {
+        margin: 0 0 0.5rem;
+        font-size: 1.35rem;
+        font-weight: 650;
+      }
+
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .thread {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .bubble {
+        max-width: 92%;
+        padding: 0.9rem 1.1rem;
+        border-radius: 18px;
+        font-size: 0.95rem;
+      }
+
+      .bubble.assistant {
+        align-self: flex-start;
+        background: var(--bubble-assistant);
+        border: 1px solid var(--bubble-assistant-border);
+        border-bottom-left-radius: 6px;
+      }
+
+      .bubble.user {
+        align-self: flex-end;
+        background: var(--bubble-user);
+        border: 1px solid #475569;
+        border-bottom-right-radius: 6px;
+      }
+
+      .bubble .label {
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--accent);
+        margin-bottom: 0.45rem;
+        font-weight: 600;
+      }
+
+      .bubble p {
+        margin: 0 0 0.65rem;
+      }
+
+      .bubble p:last-child {
+        margin-bottom: 0;
+      }
+
+      .bubble ul {
+        margin: 0.4rem 0 0;
+        padding-left: 1.2rem;
+      }
+
+      .bubble li {
+        margin-bottom: 0.35rem;
+      }
+
+      .code-block {
+        margin: 0.75rem 0 0;
+        padding: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--code-border);
+        background: var(--code-bg);
+      }
+
+      .code-block .code-title {
+        display: block;
+        padding: 0.45rem 0.85rem;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        background: #0b1220;
+        border-bottom: 1px solid var(--code-border);
+      }
+
+      .code-block pre {
+        margin: 0;
+        padding: 0.85rem 1rem;
+        overflow-x: auto;
+        font-size: 0.8rem;
+        line-height: 1.45;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .code-block code {
+        font-family: inherit;
+        white-space: pre;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--code-border);
+        padding: 0.45rem 0.6rem;
+        text-align: left;
+      }
+
+      th {
+        background: #0b1220;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>SMS Repurposer — Thread recap</h1>
+        <p>
+          Human-readable summary of the chat: what we built, how we set up Git,
+          GitHub, Vercel, and the PWA — with copy-paste commands in dedicated
+          blocks.
+        </p>
+      </header>
+
+      <div class="thread">
+        <div class="bubble assistant">
+          <span class="label">Summary</span>
+          <p>
+            We built a <strong>mobile-first PWA dashboard</strong> (Tailwind +
+            Lucide): dark header, mock “latest SMS,” generate button,
+            <strong>tabbed outputs</strong> (Instagram/Facebook vs Google
+            Business) with copy. We added a <strong>web app manifest</strong>,
+            <strong>service worker</strong> for offline-friendly caching, and
+            wired registration from the Next.js app layout.
+          </p>
+        </div>
+
+        <div class="bubble user">
+          <span class="label">Key files</span>
+          <p>Where things live in the repo:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>What</th>
+                <th>Path</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dashboard UI</td>
+                <td><code>app/page.tsx</code></td>
+              </tr>
+              <tr>
+                <td>Layout + manifest link</td>
+                <td><code>app/layout.tsx</code></td>
+              </tr>
+              <tr>
+                <td>SW registration</td>
+                <td><code>app/pwa-register.tsx</code></td>
+              </tr>
+              <tr>
+                <td>Manifest</td>
+                <td><code>public/manifest.webmanifest</code></td>
+              </tr>
+              <tr>
+                <td>Service worker</td>
+                <td><code>public/sw.js</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bubble assistant">
+          <span class="label">Local development</span>
+          <p>From the project root (folder that contains <code>package.json</code>):</p>
+          <div class="code-block">
+            <span class="code-title">Install &amp; dev server</span>
+            <pre><code>cd C:\Users\DA\sms-repurposer
+npm install
+npm run dev</code></pre>
+          </div>
+          <p style="margin-top: 0.85rem">Production-like run locally:</p>
+          <div class="code-block">
+            <span class="code-title">Build &amp; start (example port)</span>
+            <pre><code>npm run build
+npm run start -- --port 3001</code></pre>
+          </div>
+          <p style="margin-top: 0.85rem">Checks:</p>
+          <div class="code-block">
+            <span class="code-title">Lint &amp; build</span>
+            <pre><code>npm run lint
+npm run build</code></pre>
+          </div>
+        </div>
+
+        <div class="bubble user">
+          <span class="label">Git &amp; GitHub</span>
+          <ul>
+            <li>
+              If <code>git</code> is not recognized: install
+              <strong>Git for Windows</strong> from git-scm.com and restart the
+              terminal; use PATH option that exposes Git to the command line.
+            </li>
+            <li>
+              <strong>Create the empty repo on GitHub first</strong> (no README
+              if you already have local files). Otherwise <code>git push</code>
+              → “Repository not found” / 404.
+            </li>
+            <li>
+              Set commit identity (two dashes: <code>--global</code>):
+            </li>
+          </ul>
+          <div class="code-block">
+            <span class="code-title">Git user (required before commit)</span>
+            <pre><code>git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"</code></pre>
+          </div>
+          <p style="margin-top: 0.85rem">
+            Push with upstream (no space: <code>-u</code>, not <code>- u</code>):
+          </p>
+          <div class="code-block">
+            <span class="code-title">First push</span>
+            <pre><code>git remote add origin https://github.com/YOURUSER/YOURREPO.git
+git branch -M main
+git push -u origin main</code></pre>
+          </div>
+          <p style="margin-top: 0.85rem">
+            Fix wrong remote: <code>git remote set-url origin &lt;correct-url&gt;</code>
+          </p>
+        </div>
+
+        <div class="bubble assistant">
+          <span class="label">Vercel</span>
+          <ul>
+            <li>Push code to GitHub.</li>
+            <li>
+              vercel.com → Import project → click <strong>Install</strong> to
+              connect the GitHub app.
+            </li>
+            <li>Framework: Next.js; root = repo root.</li>
+            <li>
+              Deploy. No “app user accounts” needed for hosting — only your
+              GitHub + Vercel logins.
+            </li>
+          </ul>
+        </div>
+
+        <div class="bubble user">
+          <span class="label">PWA checks (Chrome)</span>
+          <ul>
+            <li>
+              DevTools → <strong>Application</strong> → Manifest (manifest
+              loads).
+            </li>
+            <li>
+              Application → <strong>Service workers</strong> →
+              <code>sw.js</code> active after load (may need refresh).
+            </li>
+            <li>
+              Network → <strong>Offline</strong> → reload: shell should still
+              load once cached.
+            </li>
+            <li>
+              Strange <code>runtime.lastError</code> in normal window but clean
+              in <strong>Incognito</strong> → often a <strong>browser
+              extension</strong>, not the app.
+            </li>
+            <li>
+              <code>/_next/static/chunks/... 500</code> → stop server,
+              <code>npm run build</code>, restart, clear site data, hard
+              refresh.
+            </li>
+          </ul>
+        </div>
+
+        <div class="bubble assistant">
+          <span class="label">TypeScript tip</span>
+          <p>
+            Error: <code>'React' refers to a UMD global...</code> — often from
+            <code>React.ReactNode</code> without importing React. Use:
+          </p>
+          <div class="code-block">
+            <span class="code-title">layout.tsx pattern</span>
+            <pre><code>import type { ReactNode } from "react";
+// children: ReactNode</code></pre>
+          </div>
+        </div>
+
+        <div class="bubble user">
+          <span class="label">Next: make it “fully functional”</span>
+          <ul>
+            <li>Database for SMS + generated drafts.</li>
+            <li>API routes: webhook (e.g. Twilio later) + read for dashboard.</li>
+            <li>Server-side generation; keep API keys on the server.</li>
+            <li>Multi-tenant: subdomain or path + branding in DB.</li>
+            <li>Simple admin UI + auth when ready.</li>
+          </ul>
+        </div>
+
+        <div class="bubble assistant">
+          <span class="label">Saving this conversation</span>
+          <p>
+            Cursor usually keeps chat history, but for safety keep this HTML
+            (and <code>docs/THREAD_RECAP.md</code>) in the repo and commit
+            updates as the project grows.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        Open this file in any browser. No network required.
+      </footer>
+    </div>
+  </body>
+</html>
